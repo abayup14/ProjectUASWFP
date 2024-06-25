@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -35,7 +36,16 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = Product::find($id);
+        $nama = $product->nama;
+        $data = $product->fasilitas;
+        return response()->json(
+            array(
+                'status' => 'oke',
+                'msg' => view('product.show', compact('nama', 'data'))->render()
+            ),
+            200
+        );
     }
 
     /**
