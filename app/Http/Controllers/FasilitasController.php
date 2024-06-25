@@ -14,7 +14,7 @@ class FasilitasController extends Controller
     {
         //
         $rs = Fasilitas::all();
-        return view("products.index", "rs");
+        return view("products.index", compact("rs"));
     }
 
     /**

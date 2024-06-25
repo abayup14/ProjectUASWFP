@@ -14,7 +14,7 @@
                                             <div class="col-md-4">
                                                 <div class="product-item">
                                                     <div class="product-title">
-                                                        <a href="">{{ $hotel->name }}</a>
+                                                        <a href="">{{ $hotel->nama }}</a>
                                                         <div class="ratting">
                                                             <i class="fa fa-star"></i>
                                                             <i class="fa fa-star"></i>
@@ -28,7 +28,7 @@
                                                             @if ($hotel->image == null)
                                                                 <img src="{{ asset('images/blank.jpg') }}">
                                                             @else
-                                                                <img src="{{ asset('images/' . $hotel->image) }}"
+                                                                <img src="{{ asset('images/hotel/' . $hotel->image) }}"
                                                                     alt="Product Image">
                                                             @endif
                                                         </a>
