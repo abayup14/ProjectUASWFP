@@ -11,6 +11,7 @@ class Fasilitas extends Model
     use HasFactory;
     protected $table = "fasilitas";
 
+
     public function product(): BelongsTo {
         return $this->belongsTo(Product::class, "products_id");
     }
