@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Product extends Model
 {
     use HasFactory;
+    protected $table = 'products';
+    public $timestamps = false;
 
     public function hotel(): BelongsTo
     {

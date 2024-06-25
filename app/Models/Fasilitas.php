@@ -10,7 +10,7 @@ class Fasilitas extends Model
 {
     use HasFactory;
     protected $table = "fasilitas";
-
+    public $timestamps = false;
 
     public function product(): BelongsTo {
         return $this->belongsTo(Product::class, "products_id");

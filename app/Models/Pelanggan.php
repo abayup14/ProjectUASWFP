@@ -10,6 +10,7 @@ class Pelanggan extends Model
 {
     use HasFactory;
     protected $table = "pelanggans";
+    public $timestamps = false;
 
     public function transaksi(): HasMany {
         return $this->hasMany(Transaksi::class, "pegawais_id", "id");

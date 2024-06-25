@@ -10,6 +10,7 @@ class Transaksi extends Model
 {
     use HasFactory;
     protected $table = "transaksis";
+    public $timestamps = false;
 
     public function pegawai(): BelongsTo {
         return $this->belongsTo(Pegawai::class, "pegawais_id");
