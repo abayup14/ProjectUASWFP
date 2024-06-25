@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 25, 2024 at 06:36 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Waktu pembuatan: 25 Jun 2024 pada 07.36
+-- Versi server: 10.4.32-MariaDB
+-- Versi PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fasilitas`
+-- Struktur dari tabel `fasilitas`
 --
 
 CREATE TABLE IF NOT EXISTS `fasilitas` (
@@ -34,12 +34,20 @@ CREATE TABLE IF NOT EXISTS `fasilitas` (
   `products_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_fasilitas_products1_idx` (`products_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data untuk tabel `fasilitas`
+--
+
+INSERT INTO `fasilitas` (`id`, `nama`, `deskripsi`, `products_id`) VALUES
+(1, 'free drinks', 'segelas minuman gratis untuk setiap pelanggan', 1),
+(2, 'meeting room', 'ruang meeting yang bisa dipinjam oleh semua p', 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hotels`
+-- Struktur dari tabel `hotels`
 --
 
 CREATE TABLE IF NOT EXISTS `hotels` (
@@ -53,12 +61,20 @@ CREATE TABLE IF NOT EXISTS `hotels` (
   `tipe_hotels_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_hotels_tipe_hotels_idx` (`tipe_hotels_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data untuk tabel `hotels`
+--
+
+INSERT INTO `hotels` (`id`, `nama`, `alamat`, `nomor_telepon`, `email`, `rating`, `image`, `tipe_hotels_id`) VALUES
+(1, 'JW Marriott', 'Jl. Embong Malang No.85 - 89', '081220924355', 'jw.marriott@gmail.com', 4.8, 'images\\hotel\\1.jpg', 1),
+(2, 'Oakwood', 'Jl. Raya Kertajaya Indah No.79', '085276443987', 'oakwood.res@gmail.com', 4.98, 'images\\hotel\\2.jpg', 3);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pegawais`
+-- Struktur dari tabel `pegawais`
 --
 
 CREATE TABLE IF NOT EXISTS `pegawais` (
@@ -68,12 +84,23 @@ CREATE TABLE IF NOT EXISTS `pegawais` (
   `password` varchar(45) NOT NULL,
   `role` enum('Owner','Staff') NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data untuk tabel `pegawais`
+--
+
+INSERT INTO `pegawais` (`id`, `nama`, `username`, `password`, `role`) VALUES
+(1, 'William Wright', 'william', 'william', 'Staff'),
+(2, 'Andreas Jaya', 'andre', 'andreas', 'Owner'),
+(3, 'Jennie Alvina', 'jennie', 'jennie', 'Owner'),
+(4, 'Andreas Bayu', 'bayu', 'bayu', 'Owner'),
+(5, 'Vincentius Bernando', 'vincent', 'vincent', 'Owner');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pelanggans`
+-- Struktur dari tabel `pelanggans`
 --
 
 CREATE TABLE IF NOT EXISTS `pelanggans` (
@@ -83,12 +110,20 @@ CREATE TABLE IF NOT EXISTS `pelanggans` (
   `password` varchar(45) NOT NULL,
   `poin` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data untuk tabel `pelanggans`
+--
+
+INSERT INTO `pelanggans` (`id`, `nama`, `username`, `password`, `poin`) VALUES
+(1, 'Tony', 'tony', 'tony', 100000),
+(2, 'Claire', 'claire', 'claire', 150000);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- Struktur dari tabel `products`
 --
 
 CREATE TABLE IF NOT EXISTS `products` (
@@ -101,12 +136,20 @@ CREATE TABLE IF NOT EXISTS `products` (
   PRIMARY KEY (`id`),
   KEY `fk_products_tipe_products1_idx` (`tipe_products_id`),
   KEY `fk_products_hotels1_idx` (`hotels_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data untuk tabel `products`
+--
+
+INSERT INTO `products` (`id`, `nama`, `harga`, `image`, `tipe_products_id`, `hotels_id`) VALUES
+(1, 'bar', 95000, 'images\\products\\1.jpeg', 1, 2),
+(2, 'cafe', 45000, 'images\\products\\2.jpeg', 2, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_transaksi`
+-- Struktur dari tabel `product_transaksi`
 --
 
 CREATE TABLE IF NOT EXISTS `product_transaksi` (
@@ -122,31 +165,56 @@ CREATE TABLE IF NOT EXISTS `product_transaksi` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tipe_hotels`
+-- Struktur dari tabel `tipe_hotels`
 --
 
 CREATE TABLE IF NOT EXISTS `tipe_hotels` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nama` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data untuk tabel `tipe_hotels`
+--
+
+INSERT INTO `tipe_hotels` (`id`, `nama`) VALUES
+(1, 'city hotel'),
+(2, 'motel'),
+(3, 'residential hotel'),
+(4, 'resort');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tipe_products`
+-- Struktur dari tabel `tipe_products`
 --
 
 CREATE TABLE IF NOT EXISTS `tipe_products` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nama` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data untuk tabel `tipe_products`
+--
+
+INSERT INTO `tipe_products` (`id`, `nama`) VALUES
+(1, 'apartment'),
+(2, 'deluxe room'),
+(3, 'double room'),
+(4, 'family room'),
+(5, 'single room'),
+(6, 'standard room'),
+(7, 'studio room'),
+(8, 'suite room'),
+(9, 'superior room');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `transaksis`
+-- Struktur dari tabel `transaksis`
 --
 
 CREATE TABLE IF NOT EXISTS `transaksis` (
@@ -164,37 +232,37 @@ CREATE TABLE IF NOT EXISTS `transaksis` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `fasilitas`
+-- Ketidakleluasaan untuk tabel `fasilitas`
 --
 ALTER TABLE `fasilitas`
   ADD CONSTRAINT `fk_fasilitas_products1` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `hotels`
+-- Ketidakleluasaan untuk tabel `hotels`
 --
 ALTER TABLE `hotels`
   ADD CONSTRAINT `fk_hotels_tipe_hotels` FOREIGN KEY (`tipe_hotels_id`) REFERENCES `tipe_hotels` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `products`
+-- Ketidakleluasaan untuk tabel `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `fk_products_hotels1` FOREIGN KEY (`hotels_id`) REFERENCES `hotels` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_products_tipe_products1` FOREIGN KEY (`tipe_products_id`) REFERENCES `tipe_products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `product_transaksi`
+-- Ketidakleluasaan untuk tabel `product_transaksi`
 --
 ALTER TABLE `product_transaksi`
   ADD CONSTRAINT `fk_transaksis_has_products_products1` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_transaksis_has_products_transaksis1` FOREIGN KEY (`transaksis_id`) REFERENCES `transaksis` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `transaksis`
+-- Ketidakleluasaan untuk tabel `transaksis`
 --
 ALTER TABLE `transaksis`
   ADD CONSTRAINT `fk_transaksis_pegawais1` FOREIGN KEY (`pegawais_id`) REFERENCES `pegawais` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
