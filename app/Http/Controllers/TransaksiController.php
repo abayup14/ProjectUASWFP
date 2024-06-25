@@ -14,7 +14,6 @@ class TransaksiController extends Controller
     {
         //
         $rs = Transaksi::all();
-
     }
 
     /**
