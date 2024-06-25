@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Hotel;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
-class HotelController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +13,6 @@ class HotelController extends Controller
     public function index()
     {
         //
-        $hotels=Hotel::all();
-        return view('hotels.index', compact('hotels'));
     }
 
     /**
@@ -39,13 +36,13 @@ class HotelController extends Controller
      */
     public function show(string $id)
     {
-        $hotel = Hotel::find($id);
-        $nama = $hotel->nama;
-        $data = $hotel->products;
+        $product = Product::find($id);
+        $nama = $product->nama;
+        $data = $product->fasilitas;
         return response()->json(
             array(
                 'status' => 'oke',
-                'msg' => view('hotel.show', compact('nama', 'data'))->render()
+                'msg' => view('product.show', compact('nama', 'data'))->render()
             ),
             200
         );
