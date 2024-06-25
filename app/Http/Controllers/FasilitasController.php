@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Hotel;
+use App\Models\Fasilitas;
 use Illuminate\Http\Request;
 
-class HotelController extends Controller
+class FasilitasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +13,8 @@ class HotelController extends Controller
     public function index()
     {
         //
-        $hotels=Hotel::all();
-        return view('hotels.index', compact('hotels'));
+        $rs = Fasilitas::all();
+        return view("products.index", "rs");
     }
 
     /**
@@ -37,24 +36,15 @@ class HotelController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Fasilitas $fasilitas)
     {
-        $hotel = Hotel::find($id);
-        $nama = $hotel->nama;
-        $data = $hotel->products;
-        return response()->json(
-            array(
-                'status' => 'oke',
-                'msg' => view('hotel.show', compact('nama', 'data'))->render()
-            ),
-            200
-        );
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Fasilitas $fasilitas)
     {
         //
     }
@@ -62,7 +52,7 @@ class HotelController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Fasilitas $fasilitas)
     {
         //
     }
@@ -70,7 +60,7 @@ class HotelController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Fasilitas $fasilitas)
     {
         //
     }
