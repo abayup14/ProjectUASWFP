@@ -9,7 +9,7 @@
                         <div class="col-md-12">
                             <div class="product-view-top">
                                 <div class="row">
-                                    <div class="flex">
+                                    <div class="flex flex-wrap">
                                         @foreach ($hotels as $hotel)
                                             <div class="col-md-4">
                                                 <div class="product-item">
@@ -24,7 +24,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="product-image">
-                                                        <a href="product-detail.html">
+                                                        <a href="/hotel/{{$hotel->id}}">
                                                             @if ($hotel->image == null)
                                                                 <img src="{{ asset('images/blank.jpg') }}">
                                                             @else

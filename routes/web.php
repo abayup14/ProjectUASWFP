@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\FrontEndController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,11 +20,29 @@ Route::get('/', [App\Http\Controllers\HotelController::class, 'index'])->name('h
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
+Route::get('/register', function () {
+    return view('auth.register');
+})->name('register');
 
-// Auth::routes();
+
+Route::get('/hotel/{id}', [App\Http\Controllers\HotelController::class, 'show']);
+Route::get('/product/{id}', [App\Http\Controllers\ProductController::class, 'show']);
+
+
+
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Auth::routes();
+Route::middleware(['auth'])->group(function () {
+    Route::get('/cart', function () {
+        return view('cart');
+    })->name('cart');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/cart/add/{id}', [FrontEndController::class, 'addToCart'])->name('addCart');
+
+    Route::get('/cart/delete/{id}', [FrontEndController::class, 'deleteFromCart'])->name('delFromCart');
+    Route::post('/cart/addQty', [FrontEndController::class, 'addQuantity'])->name('addQty');
+
+    Route::post('/cart/reduceQty', [FrontEndController::class, 'reduceQuantity'])->name('redQty');
+});

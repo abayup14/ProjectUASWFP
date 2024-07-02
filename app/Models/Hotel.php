@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Hotel extends Model
@@ -15,5 +16,8 @@ class Hotel extends Model
     public function products(): HasMany
     {
         return $this->hasMany(Product::class, 'hotels_id', 'id');
+    }
+    public function tipe_hotels(): BelongsTo {
+        return $this->belongsTo(TipeHotel::class, "tipe_hotels_id");
     }
 }

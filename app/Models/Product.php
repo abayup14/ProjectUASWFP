@@ -21,4 +21,8 @@ class Product extends Model
     public function fasilitas(): HasMany {
         return $this->hasMany(Fasilitas::class, "products_id", "id");
     }
+
+    public function tipe_products(): BelongsTo {
+        return $this->belongsTo(TipeProduct::class, "tipe_products_id");
+    }
 }

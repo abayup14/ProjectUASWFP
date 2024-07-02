@@ -14,7 +14,7 @@ class HotelController extends Controller
     public function index()
     {
         //
-        $hotels=Hotel::all();
+        $hotels = Hotel::all();
         // dd($hotels);
         return view('hotels.index', compact('hotels'));
     }
@@ -41,15 +41,7 @@ class HotelController extends Controller
     public function show(string $id)
     {
         $hotel = Hotel::find($id);
-        $nama = $hotel->nama;
-        $data = $hotel->products;
-        return response()->json(
-            array(
-                'status' => 'oke',
-                'msg' => view('hotel.show', compact('nama', 'data'))->render()
-            ),
-            200
-        );
+        return view('hotels.show', compact('hotel'));
     }
 
     /**

@@ -37,15 +37,7 @@ class ProductController extends Controller
     public function show(string $id)
     {
         $product = Product::find($id);
-        $nama = $product->nama;
-        $data = $product->fasilitas;
-        return response()->json(
-            array(
-                'status' => 'oke',
-                'msg' => view('product.show', compact('nama', 'data'))->render()
-            ),
-            200
-        );
+        return view('products.show', compact('product'));
     }
 
     /**
