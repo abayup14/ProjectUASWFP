@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\FrontEndController;
+use App\Http\Controllers\HotelController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\HotelController::class, 'index'])->name('hotel');
+Route::get('/', [HotelController::class, 'index'])->name('hotel');
 
 Route::get('/login', function () {
     return view('auth.login');
@@ -24,15 +27,17 @@ Route::get('/register', function () {
     return view('auth.register');
 })->name('register');
 
+Route::resource("hotel", HotelController::class);
+Route::resource("product", ProductController::class);
 
-Route::get('/hotel/{id}', [App\Http\Controllers\HotelController::class, 'show']);
-Route::get('/product/{id}', [App\Http\Controllers\ProductController::class, 'show']);
+//Route::get('/hotel/{id}', [App\Http\Controllers\HotelController::class, 'show']);
+//Route::get('/product/{id}', [App\Http\Controllers\ProductController::class, 'show']);
 
 
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/cart', function () {

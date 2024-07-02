@@ -4,6 +4,7 @@
     <div class="product-view">
         <div class="container-fluid">
             <div class="row">
+                <a href={{ route("product.create") }}><button class="btn btn-info">Tambah Produk</button></a>
                 <div class="col-md-12">
                     <div class="product-view-top">
                         <h1>{{ $hotel->nama }}</h1>

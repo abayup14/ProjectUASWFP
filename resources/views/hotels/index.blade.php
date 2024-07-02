@@ -6,6 +6,7 @@
             <div class="">
                 <div class="">
                     <div class="row">
+                        <a href={{ route("hotel.create") }}><button class="btn btn-info">Tambah Hotel</button></a>
                         <div class="col-md-12">
                             <div class="product-view-top">
                                 <div class="row">
@@ -15,13 +16,13 @@
                                                 <div class="product-item">
                                                     <div class="product-title">
                                                         <a href="">{{ $hotel->nama }}</a>
-                                                        <div class="ratting">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                        </div>
+{{--                                                        <div class="ratting">--}}
+{{--                                                            <i class="fa fa-star"></i>--}}
+{{--                                                            <i class="fa fa-star"></i>--}}
+{{--                                                            <i class="fa fa-star"></i>--}}
+{{--                                                            <i class="fa fa-star"></i>--}}
+{{--                                                            <i class="fa fa-star"></i>--}}
+{{--                                                        </div>--}}
                                                     </div>
                                                     <div class="product-image">
                                                         <a href="/hotel/{{$hotel->id}}">
