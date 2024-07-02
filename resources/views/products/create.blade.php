@@ -14,13 +14,13 @@
                        aria-describedby="nameHelp" placeholder="Masukkan Alamat Hotel...">
                 <br>
                 <label for="exampleInputType">Gambar Produk</label>
-                <input type="file" class="form-control" id="exampleInputType" name="hotel_image"
+                <input type="file" class="form-control" id="exampleInputType" name="product_image"
                        aria-describedby="nameHelp" placeholder="Masukkan Gambar Hotel...">
                 <input type="hidden" name='product_id' value="{{$new_product_id}}"/>
                 <br>
                 <label for="">Tipe Produk</label>
                 <br>
-                <select name="hotel_tipe">
+                <select name="produk_tipe">
                     @foreach($tipe_produk as $tp)
                         <option value={{$tp->id}}>{{$tp->nama}}</option>
                     @endforeach

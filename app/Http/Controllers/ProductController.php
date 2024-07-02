@@ -39,6 +39,20 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
+        $product = new Product();
+        $product->nama = $request->get("product_name");
+        $product->harga = $request->get("product_price");
+        $file=$request->file("product_image");
+        $ext = $file->getClientOriginalExtension();
+        $folder = 'images/products';
+        $filename = $request->get("product_id") .".".$ext;
+        $file->move($folder,$filename);
+        $product->image = $filename;
+        $product->tipe_products_id = $request->get("produk_tipe");
+        $product->hotels_id = $request->get("hotel_id");
+        $product->save();
+
+        return redirect()->route("hotel.index")->with("status", "Data berhasil ditambahkan");
     }
 
     /**
