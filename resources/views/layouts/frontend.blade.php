@@ -69,19 +69,19 @@
                         </div>
                     </div>
                     @if (Auth::user())
-                        @if (Auth::user()->role === 'Pelanggan')
-                            <a href="{{ route('cart') }}" class="btn cart">
-                                <i class="fa fa-shopping-cart"></i>
-                                <span>
-                                    @if (session('cart'))
-                                        {{ '(' . count(session('cart')) . ')' }}
-                                    @else
-                                        (0)
-                                    @endif
-                                </span>
-                            </a>
-                        @endif
-                        <div class="navbar-nav ml-auto">
+                    <div class="navbar-nav ml-auto">
+                            @if (Auth::user()->role === 'Pelanggan')
+                                <a href="{{ route('cart') }}" class="btn cart">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    <span>
+                                        @if (session('cart'))
+                                            {{ '(' . count(session('cart')) . ')' }}
+                                        @else
+                                            (0)
+                                        @endif
+                                    </span>
+                                </a>
+                            @endif
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}
                                     </a>

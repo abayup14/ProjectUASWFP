@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FrontEndController extends Controller
 {
@@ -16,9 +17,9 @@ class FrontEndController extends Controller
         if (!isset($cart[$id])) {
             $cart[$id] = [
                 'id' => $id,
-                'name' => $product->name,
+                'nama' => $product->nama,
                 'quantity' => 1,
-                'price' => $product->price,
+                'harga' => $product->harga,
                 'photo' => $product->image,
             ];
         } else {
@@ -33,15 +34,8 @@ class FrontEndController extends Controller
     {
         $id = $request->id;
         $cart = session()->get('cart');
-        $product = Product::find($cart[$id]['id']);
         if (isset($cart[$id])) {
-            $jumlahAwal = $cart[$id]['quantity'];
-            $jumlahPesan = $jumlahAwal + 1;
-            if ($jumlahPesan < $product->available_room) {
-                $cart[$id]['quantity']++;
-            } else {
-                return redirect()->back()->with('error', 'Jumlah pemesanan melebihi total kamar yang tersedia');
-            }
+            $cart[$id]['quantity']++;
         }
         session()->forget('cart');
         session()->put('cart', $cart);
@@ -58,6 +52,21 @@ class FrontEndController extends Controller
         }
         session()->forget('cart');
         session()->put('cart', $cart);
+    }
+    public function addPoinUsed()
+    {
+        $poin=Auth::user()->poin;
+        if (session()->get("poin_used") < $poin) {
+            session()->put('poin_used', session("poin_used") + 1);
+        }
+    }
+
+    public function reducePoinUsed()
+    {
+
+        if (session()->get("poin_used") > 0) {
+            session()->put('poin_used', session("poin_used") - 1);
+        }
     }
 
 
@@ -91,7 +100,7 @@ class FrontEndController extends Controller
         // $total = 0;
         // foreach ($cart as $c) {
         //     # code...
-        //     $subtotal = $c['quantity'] * $c['price'];
+        //     $subtotal = $c['quantity'] * $c['harga'];
         //     $total += $subtotal;
         //     $this->products()->attach($c['id'], ['quantity' => $c['quantity'], 'subtotal' => $subtotal]);
         // }
