@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Hotel;
 use App\Models\Product;
+use App\Models\TipeProduct;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -21,6 +24,13 @@ class ProductController extends Controller
     public function create()
     {
         //
+        $tipe_produk = TipeProduct::all();
+        $hotel = Hotel::all();
+        $last_id = Product::select(DB::raw("MAX(id) as id"))
+            ->get();
+        $new_product_id = $last_id[0]->id + 1;
+
+        return view("products.create", compact("tipe_produk", "hotel", "new_product_id"));
     }
 
     /**
@@ -29,6 +39,20 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
+        $product = new Product();
+        $product->nama = $request->get("product_name");
+        $product->harga = $request->get("product_price");
+        $file=$request->file("product_image");
+        $ext = $file->getClientOriginalExtension();
+        $folder = 'images/products';
+        $filename = $request->get("product_id") .".".$ext;
+        $file->move($folder,$filename);
+        $product->image = $filename;
+        $product->tipe_products_id = $request->get("produk_tipe");
+        $product->hotels_id = $request->get("hotel_id");
+        $product->save();
+
+        return redirect()->route("hotel.index")->with("status", "Data berhasil ditambahkan");
     }
 
     /**
