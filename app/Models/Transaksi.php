@@ -12,11 +12,20 @@ class Transaksi extends Model
     protected $table = "transaksis";
     public $timestamps = false;
 
-    public function pegawai(): BelongsTo {
-        return $this->belongsTo(Pegawai::class, "pegawais_id");
+    public function users(): BelongsTo
+    {
+        return $this->belongsTo(User::class, "pelanggans_id");
     }
-
-    public function pelanggan(): BelongsTo {
-        return $this->belongsTo(Pelanggan::class, "pelanggans_id");
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_transaksi', 'transaksis_id', 'products_id')
+            ->withPivot('quantity', 'sub_total');
+    }
+    public function insertProducts($cart)
+    {
+        foreach ($cart as $c) {
+            $subtotal = $c['quantity'] * $c['harga'];
+            $this->products()->attach($c['id'], ['quantity' => $c['quantity'], 'sub_total' => $subtotal]);
+        }
     }
 }

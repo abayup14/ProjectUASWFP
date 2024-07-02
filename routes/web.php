@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FrontEndController;
+use App\Http\Controllers\TransaksiController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/cart/delete/{id}', [FrontEndController::class, 'deleteFromCart'])->name('delFromCart');
     Route::post('/cart/addQty', [FrontEndController::class, 'addQuantity'])->name('addQty');
-
     Route::post('/cart/reduceQty', [FrontEndController::class, 'reduceQuantity'])->name('redQty');
+    Route::post('/cart/addPoinUsed', [FrontEndController::class, 'addPoinUsed'])->name('addPoinUsed');
+    Route::post('/cart/reducePoinUsed', [FrontEndController::class, 'reducePoinUsed'])->name('redPoinUsed');
 });
+Route::get('/newtransaction', [TransaksiController::class, 'store']);
