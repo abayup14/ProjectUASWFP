@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
-            $table->date("tanggal");
+            $table->dateTime("tanggal");
             $table->integer("pelanggans_id");
             $table->foreign("pelanggans_id")->references("id")->on("users");
             $table->double("total_sebelum");
