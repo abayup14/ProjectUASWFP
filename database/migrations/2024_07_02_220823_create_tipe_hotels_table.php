@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('tipe_hotels', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 45);
-            $table->string('email', 45);
-            $table->string('password', 128);
-            $table->enum("role", ["Owner", "Staff", "Pengguna"]);
-            $table->integer("poin");
+            $table->string("nama", 45);
         });
     }
 
@@ -26,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('tipe_hotels');
     }
 };
