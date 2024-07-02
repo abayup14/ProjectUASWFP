@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Fasilitas;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class FasilitasController extends Controller
@@ -14,7 +15,7 @@ class FasilitasController extends Controller
     {
         //
         $rs = Fasilitas::all();
-        return view("products.index", compact("rs"));
+        return view("fasilitas.index", compact("rs"));
     }
 
     /**
@@ -22,7 +23,8 @@ class FasilitasController extends Controller
      */
     public function create()
     {
-        //
+        $data = Product::all();
+        return view('fasilitas.formcreate', compact('data'));
     }
 
     /**
@@ -30,7 +32,12 @@ class FasilitasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new Fasilitas();
+        $data->nama = $request->get("fasilitas_name");
+        $data->deskripsi = $request->get("fasilitas_price");
+        $data->products_id = $request->get("fasilitas_product");
+        $data->save();
+        return redirect()->route('fasilitas.index')->with('status', 'Horray ! Your data is successfully recorded !');
     }
 
     /**
