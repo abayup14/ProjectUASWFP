@@ -57,7 +57,7 @@ class HotelController extends Controller
         $hotel->tipe_hotels_id = $request->get("hotel_tipe");
         $hotel->save();
 
-        return redirect()->route("hotel.index")->with("status", "Data berhasil ditambahkan");
+        return redirect()->back()->with("status", "Data berhasil ditambahkan");
     }
 
     /**

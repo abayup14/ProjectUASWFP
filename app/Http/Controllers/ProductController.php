@@ -52,7 +52,7 @@ class ProductController extends Controller
         $product->hotels_id = $request->get("hotel_id");
         $product->save();
 
-        return redirect()->route("hotel.index")->with("status", "Data berhasil ditambahkan");
+        return redirect()->back()->with("status", "Data berhasil ditambahkan");
     }
 
     /**
