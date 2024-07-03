@@ -41,6 +41,7 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('pelanggan', Auth::user());
         //
         $cart = session()->get('cart');
         $total = 0;

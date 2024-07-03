@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Transaksi;
 use App\Models\TipeHotel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HotelController extends Controller
@@ -30,6 +31,7 @@ class HotelController extends Controller
      */
     public function create()
     {
+        $this->authorize('internal', Auth::user());
         //
         $tipe_hotel = TipeHotel::all();
         $last_id = Hotel::select(DB::raw("MAX(id) as id"))
@@ -45,6 +47,7 @@ class HotelController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('internal', Auth::user());
         //
         $hotel = new Hotel();
         $hotel->nama = $request->get("hotel_name");
@@ -94,6 +97,7 @@ class HotelController extends Controller
      */
     public function destroy(string $id)
     {
+        $this->authorize('internal', Auth::user());
         //
         try {
             $deletedData = Hotel::find($id);
@@ -107,6 +111,7 @@ class HotelController extends Controller
 
     public function report()
     {
+        $this->authorize('internal', Auth::user());
         $hotels = Hotel::all();
         $products = Product::all();
         $users = User::all();

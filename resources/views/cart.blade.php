@@ -91,6 +91,7 @@
                                 @php
 
                                 @endphp
+                                @if (Auth::user()->member=="Member")
                                 <div class="invoice">
                                     <p>Poin yang Digunakan</p>
                                     <div class="poin">
@@ -105,6 +106,7 @@
                                         @endif
                                     </div>
                                 </div>
+                                @endif
                             @endif
                             <div class="invoice">
                                 <h2>Grand Total</h2>

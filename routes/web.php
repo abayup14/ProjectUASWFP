@@ -33,21 +33,23 @@ Route::resource("hotel", HotelController::class);
 Route::resource("product", ProductController::class);
 Route::resource("fasilitas", FasilitasController::class);
 
-Route::get("/listmember", [\App\Http\Controllers\UserController::class, "listMember"])->name("listmember");
-
-//Route::get('/hotel/{id}', [App\Http\Controllers\HotelController::class, 'show']);
-//Route::get('/product/{id}', [App\Http\Controllers\ProductController::class, 'show']);
-
-Route::post('/changemember', [\App\Http\Controllers\UserController::class, 'changeMember'])->name('changemember');
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get("/listmember", [\App\Http\Controllers\UserController::class, "listMember"])->name("listmember");
+    Route::post('/changemember', [\App\Http\Controllers\UserController::class, 'changeMember'])->name('changemember');
     Route::get('/cart', function () {
         return view('cart');
     })->name('cart');
 
+    Route::get('/newtransaction', [TransaksiController::class, 'store']);
+
+    Route::get('/list_transaksi', [TransaksiController::class, 'listTransaksi']);
+    Route::get('/list_transaksi/{id}', [TransaksiController::class, 'show']);
+
+    Route::get('/report', [HotelController::class, 'report']);
     Route::get('/cart/add/{id}', [FrontEndController::class, 'addToCart'])->name('addCart');
 
     Route::get('/cart/delete/{id}', [FrontEndController::class, 'deleteFromCart'])->name('delFromCart');
@@ -56,10 +58,3 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/cart/addPoinUsed', [FrontEndController::class, 'addPoinUsed'])->name('addPoinUsed');
     Route::post('/cart/reducePoinUsed', [FrontEndController::class, 'reducePoinUsed'])->name('redPoinUsed');
 });
-Route::get('/newtransaction', [TransaksiController::class, 'store']);
-
-Route::get('/list_transaksi', [TransaksiController::class, 'listTransaksi']);
-Route::get('/list_transaksi/{id}', [TransaksiController::class, 'show']);
-
-Route::get('/report', [HotelController::class, 'report']);
-

@@ -6,9 +6,17 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-view-top">
-                        <h1>{{ $product->nama }}</h1>
+                        <div class="flex" style="justify-content: space-between; align-items:center">
+
+                            <h1>{{ $product->nama }}</h1>
+                            @if (Auth::user())
+                                @if (Auth::user()->role != 'Pelanggan')
+                                    <a class="btn btn-warning" href="{{ route('fasilitas.create') }}">+ Add Fasilitas</a>
+                                @endif
+                            @endif
+                        </div>
                         <p class="btn btn-danger">{{ $product->tipe_products->nama }}</p>
-                        <p>{{ $product->harga }}</p>
+                        <p>Harga : {{ $product->harga }}</p>
                         @if ($product->image == null)
                             <img src="{{ asset('images/blank.jpg') }}">
                         @else
@@ -26,11 +34,5 @@
                                 </div>
                             @endforeach
                         </div>
-                        @if (Auth::user())
-                            @if (Auth::user()->role != "pelanggan")
-                                <a class="btn btn-warning" href="{{ route('fasilitas.create') }}">+ Add Fasilitas</a>
-                            @endif
-                        @endif
-
                     </div>
                 @endsection

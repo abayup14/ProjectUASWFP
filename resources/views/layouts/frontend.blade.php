@@ -58,8 +58,6 @@
                         @if (Auth::user())
                             <a href="/list_transaksi" class="nav-item nav-link">List Transaksi</a>
                             @if (Auth::user()->role != 'Pelanggan')
-
-                                <a href="/list_order" class="nav-item nav-link">List Order</a>
                                 <a href="/report" class="nav-item nav-link">Laporan</a>
 
                             @endif

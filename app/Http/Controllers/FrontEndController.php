@@ -12,6 +12,8 @@ class FrontEndController extends Controller
     //
     public function addToCart($id)
     {
+
+        $this->authorize('pelanggan', Auth::user());
         $product = Product::find($id);
         $cart = session()->get('cart');
         if (!isset($cart[$id])) {
@@ -33,6 +35,8 @@ class FrontEndController extends Controller
 
     public function addQuantity(Request $request)
     {
+
+        $this->authorize('pelanggan', Auth::user());
         $id = $request->id;
         $cart = session()->get('cart');
         if (isset($cart[$id])) {
@@ -44,6 +48,8 @@ class FrontEndController extends Controller
 
     public function reduceQuantity(Request $request)
     {
+
+        $this->authorize('pelanggan', Auth::user());
         $id = $request->id;
         $cart = session()->get('cart');
         if (isset($cart[$id])) {
@@ -57,6 +63,8 @@ class FrontEndController extends Controller
     }
     public function addPoinUsed()
     {
+
+        $this->authorize('pelanggan', Auth::user());
         $poin=Auth::user()->poin;
         if (session()->get("poin_used") < $poin) {
             session()->put('poin_used', session("poin_used") + 1);
@@ -65,6 +73,7 @@ class FrontEndController extends Controller
 
     public function reducePoinUsed()
     {
+        $this->authorize('pelanggan', Auth::user());
 
         if (session()->get("poin_used") > 0) {
             session()->put('poin_used', session("poin_used") - 1);
@@ -75,6 +84,8 @@ class FrontEndController extends Controller
 
     public function deleteFromCart($id)
     {
+
+        $this->authorize('pelanggan', Auth::user());
         $cart = session()->get('cart');
         if (isset($cart[$id])) {
             unset($cart[$id]);

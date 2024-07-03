@@ -13,6 +13,13 @@
                                         <form method="POST" action="{{ route('fasilitas.store') }}">
                                             @csrf
                                             <div class="form-group">
+                                                <label for="exampleInputType">Produk</label>
+                                                <select name="product" id="exampleInputType">
+                                                    @foreach ($data as $d)
+                                                        <option value={{ $d->id }}>{{ $d->nama }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <br>
                                                 <label for="exampleInputType">Name of Fasilitas</label>
                                                 <input type="text" class="form-control" id="exampleInputType"
                                                     name="fasilitas_nama" aria-describedby="nameHelp"
@@ -21,11 +28,7 @@
                                                 <input type="text" class="form-control" id="exampleInputType"
                                                     name="fasilitas_deskripsi" aria-describedby="nameHelp"
                                                     placeholder="Enter Description of fasilitas...">
-                                                <select name="product">
-                                                    @foreach ($data as $d)
-                                                        <option value={{ $d->id }}>{{ $d->nama }}</option>
-                                                    @endforeach
-                                                </select>
+
                                             </div>
 
                                             <button type="submit" class="btn btn-primary">Submit</button>

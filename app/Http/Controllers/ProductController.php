@@ -6,6 +6,7 @@ use App\Models\Hotel;
 use App\Models\Product;
 use App\Models\TipeProduct;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
@@ -24,6 +25,8 @@ class ProductController extends Controller
     public function create()
     {
         //
+
+        $this->authorize('internal', Auth::user());
         $tipe_produk = TipeProduct::all();
         $hotel = Hotel::all();
         $last_id = Product::select(DB::raw("MAX(id) as id"))
@@ -38,6 +41,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('internal', Auth::user());
         //
         $product = new Product();
         $product->nama = $request->get("product_name");
@@ -85,6 +89,7 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
+        $this->authorize('internal', Auth::user());
         //
         try {
             $deletedData = Product::find($id);

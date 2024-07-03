@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -64,7 +65,9 @@ class UserController extends Controller
         //
     }
 
-    public function listMember() {
+    public function listMember()
+    {
+        $this->authorize('owner', Auth::user());
         $member = User::select(DB::raw("*"))
             ->where("role", "=", "Pelanggan")
             ->get();
@@ -72,9 +75,12 @@ class UserController extends Controller
         return view("member.listmember", compact("member"));
     }
 
-    public function changeMember($id, $new_member) {
-        $edit_member = User::find($id);
-        $edit_member->member = $new_member;
+    public function changeMember(Request $request)
+    {
+        $this->authorize('owner', Auth::user());
+        $edit_member = User::find($request->get('id'));
+        $edit_member->member = $request->get('new_member');
+        $edit_member->poin = 0;
         $edit_member->save();
 
         return redirect()->back()->with("status", "Berhasil Ubah Tipe Member");

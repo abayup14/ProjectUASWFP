@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Fasilitas;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FasilitasController extends Controller
 {
@@ -23,6 +24,7 @@ class FasilitasController extends Controller
      */
     public function create()
     {
+        $this->authorize('internal', Auth::user());
         $data = Product::all();
         return view('fasilitas.formcreate', compact('data'));
     }
@@ -32,6 +34,8 @@ class FasilitasController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->authorize('internal', Auth::user());
         $data = new Fasilitas();
         $data->nama = $request->get("fasilitas_nama");
         $data->deskripsi = $request->get("fasilitas_deskripsi");
