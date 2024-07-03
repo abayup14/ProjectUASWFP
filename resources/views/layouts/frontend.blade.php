@@ -56,11 +56,8 @@
                     <div class="navbar-nav mr-auto">
                         <a href="/hotel" class="nav-item nav-link">Home</a>
                         @if (Auth::user())
-                            @if (Auth::user()->role == 'Pelanggan')
-                                <a href="/list_transaksi" class="nav-item nav-link">List Transaksi</a>
-                            @endif
+                            <a href="/list_transaksi" class="nav-item nav-link">List Transaksi</a>
                             @if (Auth::user()->role != 'Pelanggan')
-                                <a href="/list_order" class="nav-item nav-link">List Order</a>
                                 <a href="/laporan" class="nav-item nav-link">Laporan</a>
                             @endif
                             @if (Auth::user()->role == 'Owner')

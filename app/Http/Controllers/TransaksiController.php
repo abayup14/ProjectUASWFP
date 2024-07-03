@@ -17,6 +17,16 @@ class TransaksiController extends Controller
         //
         $rs = Transaksi::all();
     }
+    public function listTransaksi()
+    {
+        //
+        if (Auth::user()->role == "Pelanggan") {
+            $transaksis = Transaksi::all()->where("pelanggans_id", "=", Auth::user()->id);
+        } else {
+            $transaksis = Transaksi::all();
+        }
+        return view("transaksis.list_transaksi", compact('transaksis'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -51,7 +61,7 @@ class TransaksiController extends Controller
         $data->pelanggans_id = Auth::user()->id;
         $data->total_sebelum = $total;
         $data->total_sesudah_pajak = $total * 111 / 100;
-        $data->poin_terpakai = session()->get('poin_used');
+        $data->poin_terpakai = session()->get('poin_used', 0);
         $data->total_bayar = $data->total_sesudah_pajak - session('poin_used', 0) * 100000;
         $data->save();
         $data->insertProducts($cart);
@@ -75,9 +85,11 @@ class TransaksiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Transaksi $transaksi)
+    public function show(string $id)
     {
         //
+        $transaksi = Transaksi::find($id);
+        return view('transaksis.show', compact('transaksi'));
     }
 
     /**

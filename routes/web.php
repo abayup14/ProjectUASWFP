@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FasilitasController;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\HotelController;
@@ -30,6 +31,7 @@ Route::get('/register', function () {
 
 Route::resource("hotel", HotelController::class);
 Route::resource("product", ProductController::class);
+Route::resource("fasilitas", FasilitasController::class);
 
 //Route::get('/hotel/{id}', [App\Http\Controllers\HotelController::class, 'show']);
 //Route::get('/product/{id}', [App\Http\Controllers\ProductController::class, 'show']);
@@ -54,3 +56,5 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/cart/reducePoinUsed', [FrontEndController::class, 'reducePoinUsed'])->name('redPoinUsed');
 });
 Route::get('/newtransaction', [TransaksiController::class, 'store']);
+Route::get('/list_transaksi', [TransaksiController::class, 'listTransaksi']);
+Route::get('/list_transaksi/{id}', [TransaksiController::class, 'show']);
