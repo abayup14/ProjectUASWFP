@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -60,5 +62,13 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function listMember() {
+        $member = User::select(DB::raw("*"))
+            ->where("role", "=", "Pelanggan")
+            ->get();
+
+        return view("member.listmember", compact("member"));
     }
 }

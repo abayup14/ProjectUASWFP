@@ -61,7 +61,7 @@
                                 <a href="/laporan" class="nav-item nav-link">Laporan</a>
                             @endif
                             @if (Auth::user()->role == 'Owner')
-                                <a href="/list_member" class="nav-item nav-link">List Member</a>
+                                <a href="{{route("listmember")}}" class="nav-item nav-link">List Member</a>
                             @endif
                         @endif
                     </div>

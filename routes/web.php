@@ -33,6 +33,8 @@ Route::resource("hotel", HotelController::class);
 Route::resource("product", ProductController::class);
 Route::resource("fasilitas", FasilitasController::class);
 
+Route::get("/listmember", [\App\Http\Controllers\UserController::class, "listMember"])->name("listmember");
+
 //Route::get('/hotel/{id}', [App\Http\Controllers\HotelController::class, 'show']);
 //Route::get('/product/{id}', [App\Http\Controllers\ProductController::class, 'show']);
 
