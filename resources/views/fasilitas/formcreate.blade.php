@@ -21,7 +21,7 @@
                                                 <input type="text" class="form-control" id="exampleInputType"
                                                     name="fasilitas_deskripsi" aria-describedby="nameHelp"
                                                     placeholder="Enter Description of fasilitas...">
-                                                <select name="product" id="products">
+                                                <select name="product">
                                                     @foreach ($data as $d)
                                                         <option value={{ $d->id }}>{{ $d->nama }}</option>
                                                     @endforeach
@@ -29,7 +29,6 @@
                                             </div>
 
                                             <button type="submit" class="btn btn-primary">Submit</button>
-                                            {{-- <a class="btn btn-warning" href="{{ route('product.index') }}">Back</a> --}}
                                         </form>
                                     </div>
                                 </div>

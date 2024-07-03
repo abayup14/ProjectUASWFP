@@ -33,11 +33,11 @@ class FasilitasController extends Controller
     public function store(Request $request)
     {
         $data = new Fasilitas();
-        $data->nama = $request->get("fasilitas_name");
-        $data->deskripsi = $request->get("fasilitas_price");
-        $data->products_id = $request->get("fasilitas_product");
+        $data->nama = $request->get("fasilitas_nama");
+        $data->deskripsi = $request->get("fasilitas_deskripsi");
+        $data->products_id = $request->get("product");
         $data->save();
-        return redirect()->route('fasilitas.index')->with('status', 'Horray ! Your data is successfully recorded !');
+        return redirect()->route('hotel.index')->with('status', 'Horray ! Your data is successfully recorded !');
     }
 
     /**

@@ -26,5 +26,6 @@
                                 </div>
                             @endforeach
                         </div>
+                        <a class="btn btn-warning" href="{{ route('fasilitas.create') }}">+ Add Fasilitas</a>
                     </div>
                 @endsection
