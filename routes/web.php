@@ -57,5 +57,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/cart/reducePoinUsed', [FrontEndController::class, 'reducePoinUsed'])->name('redPoinUsed');
 });
 Route::get('/newtransaction', [TransaksiController::class, 'store']);
+
 Route::get('/list_transaksi', [TransaksiController::class, 'listTransaksi']);
 Route::get('/list_transaksi/{id}', [TransaksiController::class, 'show']);
+
+Route::get('/report', [HotelController::class, 'report']);
+

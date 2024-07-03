@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Fasilitas;
 use App\Models\Hotel;
+use App\Models\Product;
+use App\Models\User;
+use App\Models\Transaksi;
 use App\Models\TipeHotel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -99,5 +103,15 @@ class HotelController extends Controller
             $msg = "Failed to delete data ! Make sure there is no related data before deleting it";
             return redirect()->route('hotels.index')->with('status_error',$msg);
         }
+    }
+
+    public function report()
+    {
+        $hotels = Hotel::all();
+        $products = Product::all();
+        $users = User::all();
+        $transaksis = Transaksi::all();
+        $fasilitases = Fasilitas::all();
+        return view('hotels.report', compact('hotels','products','users','transaksis','fasilitases'));
     }
 }

@@ -58,7 +58,10 @@
                         @if (Auth::user())
                             <a href="/list_transaksi" class="nav-item nav-link">List Transaksi</a>
                             @if (Auth::user()->role != 'Pelanggan')
-                                <a href="/laporan" class="nav-item nav-link">Laporan</a>
+
+                                <a href="/list_order" class="nav-item nav-link">List Order</a>
+                                <a href="/report" class="nav-item nav-link">Laporan</a>
+
                             @endif
                             @if (Auth::user()->role == 'Owner')
                                 <a href="{{route("listmember")}}" class="nav-item nav-link">List Member</a>
