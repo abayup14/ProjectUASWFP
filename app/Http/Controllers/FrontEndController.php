@@ -21,6 +21,7 @@ class FrontEndController extends Controller
                 'quantity' => 1,
                 'harga' => $product->harga,
                 'photo' => $product->image,
+                'tipe'=>$product->tipe_products->nama,
             ];
         } else {
             $cart[$id]['quantity']++;
@@ -51,6 +52,7 @@ class FrontEndController extends Controller
             }
         }
         session()->forget('cart');
+        session()->put('poin_used', 0);
         session()->put('cart', $cart);
     }
     public function addPoinUsed()
@@ -79,6 +81,8 @@ class FrontEndController extends Controller
         }
         session()->forget('cart');
         session()->put('cart', $cart);
+
+        session()->put('poin_used', 0);
         return redirect()->back()->with("status", "Produk Telah dibuang dari Cart");
     }
     public function checkout()

@@ -54,22 +54,21 @@
 
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto">
-                        <a href="index.html" class="nav-item nav-link">Home</a>
-                        <a href="product-list.html" class="nav-item nav-link">Products</a>
-                        <a href="product-detail.html" class="nav-item nav-link">Product Detail</a>
-                        <a href="my-account.html" class="nav-item nav-link">My Account</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">More
-                                Pages</a>
-                            <div class="dropdown-menu">
-                                <a href="wishlist.html" class="dropdown-item">Wishlist</a>
-                                <a href="login.html" class="dropdown-item active">Login & Register</a>
-                                <a href="contact.html" class="dropdown-item">Contact Us</a>
-                            </div>
-                        </div>
+                        <a href="/hotel" class="nav-item nav-link">Home</a>
+                        @if (Auth::user())
+                            @if (Auth::user()->role == 'Pelanggan')
+                                <a href="/list_transaksi" class="nav-item nav-link">List Transaksi</a>
+                            @endif
+                            @if (Auth::user()->role != 'Pelanggan')
+                                <a href="/list_order" class="nav-item nav-link">List Order</a>
+                            @endif
+                            @if (Auth::user()->role == 'Owner')
+                                <a href="/list_member" class="nav-item nav-link">List Member</a>
+                            @endif
+                        @endif
                     </div>
                     @if (Auth::user())
-                    <div class="navbar-nav ml-auto">
+                        <div class="navbar-nav ml-auto">
                             @if (Auth::user()->role === 'Pelanggan')
                                 <a href="{{ route('cart') }}" class="btn cart">
                                     <i class="fa fa-shopping-cart"></i>
@@ -83,22 +82,22 @@
                                 </a>
                             @endif
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
+                                <a href="#" class="nav-link dropdown-toggle"
+                                    data-toggle="dropdown">{{ Auth::user()->name }}
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
                                                                      document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
-                                        </a>
+                                        {{ __('Logout') }}
+                                    </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                            @csrf
-                                        </form>
-                                    </div>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
                             </div>
                         </div>
-
                     @else
                         <div class="navbar-nav ml-auto">
                             <div class="nav-item dropdown">

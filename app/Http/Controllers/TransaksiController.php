@@ -34,10 +34,17 @@ class TransaksiController extends Controller
         //
         $cart = session()->get('cart');
         $total = 0;
+        $poin_tambah = 0;
+        $totalNonPremium = 0;
         foreach ($cart as $item) {
             $total += $item["quantity"] * $item["harga"];
+            if ($item["tipe"] == "Deluxe" || $item["tipe"] == "Superior" || $item["tipe"] == "Suite") {
+                $poin_tambah += $item["quantity"] * 5;
+            } else {
+                $totalNonPremium += $item["quantity"] * $item["harga"];
+            }
         }
-
+        $poin_tambah += floor($totalNonPremium / 300000);
 
         $data = new Transaksi();
         $data->tanggal = date('Y-m-d H:i:s');
@@ -50,12 +57,19 @@ class TransaksiController extends Controller
         $data->insertProducts($cart);
 
         $user = User::find(Auth::user()->id);
-        $user->poin -= session()->get('poin_used');
-        $user->save();
+        if ($user->member == "Member") {
+            $user->poin -= session()->get('poin_used');
+            $user->poin += $poin_tambah;
+            $user->save();
+        }
 
         session()->forget('cart');
         session()->forget('poin_used');
-        return redirect()->route('hotel')->with('status', 'Horray ! Your data is successfully recorded !');
+        if ($poin_tambah > 0 && $user->member == "Member") {
+            return redirect()->route('hotel')->with('status', 'Horray ! Your data is successfully recorded ! You got ' . $poin_tambah . " point!");
+        } else {
+            return redirect()->route('hotel')->with('status', 'Horray ! Your data is successfully recorded !');
+        }
     }
 
     /**

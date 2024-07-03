@@ -35,6 +35,7 @@
                                             @endif
 
                                             <p>{{ $item['nama'] }}</p>
+                                            <p class="btn btn-danger">{{ $item['tipe'] }}</p>
                                         </div>
                                     </td>
                                     <td>{{ 'IDR ' . $item['harga'] }}</td>
@@ -86,27 +87,32 @@
                                 <p>Total Sesudah Pajak</p>
                                 <p>{{ 'IDR ' . $totalPajak }}</p>
                             </div>
-                            <div class="invoice">
-                                <p>Poin yang Digunakan</p>
-                                <div class="poin">
-                                    @if (session('poin_used', 0) > 0)
-                                        <button onclick="redPoinUsed()" class="btn-minus"><i
-                                                class="fa fa-minus"></i></button>
-                                    @endif
-                                    <input type="text" value="{{ session('poin_used', 0) }}" id="poin_used">
-                                    @if ($totalBayar - 100000 > 0)
-                                        <button onclick="addPoinUsed()" class="btn-plus"><i
-                                                class="fa fa-plus"></i></button>
-                                    @endif
+                            @if ($total >= 100000)
+                                @php
+
+                                @endphp
+                                <div class="invoice">
+                                    <p>Poin yang Digunakan</p>
+                                    <div class="poin">
+                                        @if (session('poin_used', 0) > 0)
+                                            <button onclick="redPoinUsed()" class="btn-minus"><i
+                                                    class="fa fa-minus"></i></button>
+                                        @endif
+                                        <input type="text" value="{{ session('poin_used', 0) }}" id="poin_used">
+                                        @if ($totalBayar - 100000 > 0)
+                                            <button onclick="addPoinUsed()" class="btn-plus"><i
+                                                    class="fa fa-plus"></i></button>
+                                        @endif
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                             <div class="invoice">
                                 <h2>Grand Total</h2>
                                 <h2>{{ 'IDR ' . $totalBayar }}</h2>
                             </div>
                         </div>
-                        <div class="cart-btn">
-                            <a class="btn btn-xs" href="/">Continue Shopping</button>
+                        <div class="cart-btn" style="display:flex;justify-content: end">
+                            <a class="btn btn-xs" href="/">Continue Shopping</a>
                             <a class="btn btn-xs" href="/newtransaction">Checkout</a>
                         </div>
                     </div>
