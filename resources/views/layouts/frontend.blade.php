@@ -61,6 +61,7 @@
                             @endif
                             @if (Auth::user()->role != 'Pelanggan')
                                 <a href="/list_order" class="nav-item nav-link">List Order</a>
+                                <a href="/laporan" class="nav-item nav-link">Laporan</a>
                             @endif
                             @if (Auth::user()->role == 'Owner')
                                 <a href="/list_member" class="nav-item nav-link">List Member</a>
