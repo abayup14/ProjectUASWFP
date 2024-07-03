@@ -38,8 +38,7 @@ Route::get("/listmember", [\App\Http\Controllers\UserController::class, "listMem
 //Route::get('/hotel/{id}', [App\Http\Controllers\HotelController::class, 'show']);
 //Route::get('/product/{id}', [App\Http\Controllers\ProductController::class, 'show']);
 
-
-
+Route::post('/changemember', [\App\Http\Controllers\UserController::class, 'changeMember'])->name('changemember');
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');

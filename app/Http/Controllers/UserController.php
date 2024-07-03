@@ -71,4 +71,12 @@ class UserController extends Controller
 
         return view("member.listmember", compact("member"));
     }
+
+    public function changeMember($id, $new_member) {
+        $edit_member = User::find($id);
+        $edit_member->member = $new_member;
+        $edit_member->save();
+
+        return redirect()->back()->with("status", "Berhasil Ubah Tipe Member");
+    }
 }
