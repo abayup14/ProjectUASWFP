@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('password', 128);
             $table->enum("role", ["Owner", "Staff", "Pengguna"]);
             $table->integer("poin");
+            $table->enum("member", ["Menber", "Bukan Member"]);
+            $table->rememberToken();
         });
     }
 

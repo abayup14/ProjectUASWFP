@@ -6,7 +6,12 @@
             <div class="">
                 <div class="">
                     <div class="row">
-                        <a href={{ route("hotel.create") }}><button class="btn btn-info">Tambah Hotel</button></a>
+                        @if(Auth::user())
+                            @if(Auth::user()->role == "Owner")
+                                <a href={{ route("hotel.create") }}><button class="btn btn-info">Tambah Hotel</button></a>
+                            @endif
+                        @endif
+
                         <div class="col-md-12">
                             <div class="product-view-top">
                                 <div class="row">
@@ -32,6 +37,12 @@
                                                                 <img src="{{ asset('images/hotel/' . $hotel->image) }}"
                                                                     alt="Product Image">
                                                             @endif
+                                                                <form action="{{route("hotel.destroy", $hotel->id)}}" method="POST">
+                                                                    @csrf
+                                                                    @method("DELETE")
+                                                                    <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure to delete {{$hotel->id}} - {{$hotel->nama}} ?');">
+                                                                </form>
+
                                                         </a>
                                                     </div>
                                                 </div>

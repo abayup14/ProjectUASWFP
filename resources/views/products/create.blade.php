@@ -20,7 +20,7 @@
                 <br>
                 <label for="">Tipe Produk</label>
                 <br>
-                <select name="produk_tipe">
+                <select name="produk_tipe" class="form-control">
                     @foreach($tipe_produk as $tp)
                         <option value={{$tp->id}}>{{$tp->nama}}</option>
                     @endforeach
@@ -29,7 +29,7 @@
                 <br>
                 <label for="">Hotel</label>
                 <br>
-                <select name="hotel_id">
+                <select name="hotel_id" class="form-control">
                     @foreach($hotel as $h)
                         <option value={{$h->id}}>{{$h->nama}}</option>
                     @endforeach

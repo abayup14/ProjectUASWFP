@@ -4,7 +4,11 @@
     <div class="product-view">
         <div class="container-fluid">
             <div class="row">
-                <a href={{ route('product.create') }}><button class="btn btn-info">Tambah Produk</button></a>
+                @if(Auth::user())
+                    @if(Auth::user()->role == "Owner")
+                        <a href={{ route('product.create') }}><button class="btn btn-info">Tambah Produk</button></a>
+                    @endif
+                @endif
                 <div class="col-md-12">
                     <div class="product-view-top">
                         <h1>{{ $hotel->nama }}</h1>
@@ -43,6 +47,11 @@
                                                         class="fa fa-shopping-cart"></i>Add to Cart</a>
                                                 <a class="btn" href="#"><i class="fa fa-shopping-bag"></i>Buy
                                                     Now</a>
+                                                <form action="{{route("product.destroy", $hotel->id)}}" method="POST">
+                                                    @csrf
+                                                    @method("DELETE")
+                                                    <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure to delete {{$product->id}} - {{$product->nama}} ?');">
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

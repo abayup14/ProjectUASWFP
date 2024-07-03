@@ -86,5 +86,13 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         //
+        try {
+            $deletedData = Product::find($id);
+            $deletedData->delete();
+            return redirect()->route("hotels.index")->with("status", "Data berhasil dihapus");
+        } catch (\PDOException $ex) {
+            $msg = "Failed to delete data ! Make sure there is no related data before deleting it";
+            return redirect()->route('hotels.index')->with('status_error',$msg);
+        }
     }
 }
